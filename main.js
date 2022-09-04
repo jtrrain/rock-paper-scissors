@@ -1,20 +1,35 @@
 function playMatch(result) {
     let playerScore = 0
     let computerScore = 0
-    for (let i = 0; i < 5; i++) {
-        playRound();
-            if (result === "YOU WIN" ) {
-                playerScore = playerScore + 1 
-            } else if (result === "YOU LOSE") {
-                computerScore = computerScore + 1
-            } else {
-                i = i - 1
+    console.log("...best 3 out of 5 wins...")
+    while (playerScore < 3 && computerScore < 3) {
+        const playerSelection = playerChoice();
+        const computerSelection = computerChoice();
+        console.log("you picked " + playerSelection)
+        console.log("the computer choose " + computerSelection)
+        if (playerSelection === computerSelection) {
+            console.log("tie")
+            console.log("You: " + playerScore)
+            console.log("The Machine: " + computerScore)
+        } else if ( (playerSelection === "rock" && computerSelection === "scissors") ||
+            (playerSelection === "scissors" && computerSelection == "paper") || 
+            (playerSelection == "paper" && computerSelection == "rock")) {
+            playerScore++
+            console.log("win")
+            console.log("You: " + playerScore)
+            console.log("The Machine: " + computerScore)
+        } else if ((playerSelection === "scissors" && computerSelection === "rock") ||
+            (playerSelection === "paper" && computerSelection === "scissors") ||
+            (playerSelection === "rock" && computerSelection === "paper")) {
+            computerScore++
+            console.log("lose")
+            console.log("You: " + playerScore)
+            console.log("The Machine: " + computerScore)
+        } else {
+            console.log("error")
             }
-        console.log(i)
-        console.log("You: " + playerScore)
-        console.log("The Machine: " + computerScore)
+        console.log("...")
 }}
-// this function doesn't work
 
 function playRound() {
     const playerSelection = playerChoice();
@@ -60,4 +75,4 @@ function gameResult(playerSelection, computerSelection) {
         return "YOU LOSE";}
     }
 
-playRound();
+playMatch();
